@@ -1,0 +1,15 @@
+service: barndoor-auth-server
+
+provider:
+ name: aws
+ runtime: nodejs12.x
+ memorySize: 128
+ timeout: 60
+ stage: dev
+ region: ap-south-1
+
+functions:
+ api:
+   handler: lambda.universal
+   events:
+     - http: ANY
