@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const authController = require("./Controllers/AuthController");
+const authController = require("./controllers/AuthController");
 
-router.post("/auth/register", authController.register);
-router.post("/auth/login", authController.login);
-router.post("/auth/refreshSession", authController.refreshSession);
-router.post('/auth/validate', authController.validate_token);
+router.post("/register", authController.register);
+router.post("/login", authController.login);
+router.post("/refreshSession", authController.refreshSession);
+router.post('/validate', authController.validate);
 
 module.exports = router;

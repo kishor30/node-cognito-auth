@@ -1,15 +1,42 @@
-service: barndoor-auth-server
+service: barndoor-auth-server-dev-api
 
 provider:
- name: aws
- runtime: nodejs12.x
- memorySize: 128
- timeout: 60
- stage: dev
- region: ap-south-1
-
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 128
+  timeout: 60
+  stage: dev
+  region: us-west-2
+  vpc:
+    securityGroupsIds:
+      - sg-06f7aeae2344ef325
+    subnetIds:
+      - subnet-0173285250cf46292
+  environment:
+    STAGE: dev
+         
 functions:
- api:
-   handler: lambda.universal
-   events:
-     - http: ANY
+  register:
+    handler: controllers/AuthController.register
+    memorySize: 128
+    description: Submit users to cognito.
+    events:
+      - http: 
+          path: register
+          method: post
+  login:
+    handler: controllers/AuthController.login
+    memorySize: 128
+    description: login users to barndoor using cognito.
+    events:
+      - http: 
+          path: login
+          method: post
+  validate:
+    handler: controllers/AuthController.validate
+    memorySize: 128
+    description: Submit users to cognito.
+    events:
+      - http: 
+          path: validate
+          method: post        
